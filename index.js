@@ -1,7 +1,7 @@
-require('dotenv').config(); 
+require('dotenv').config();
 const express = require('express');
 const { OpenAI } = require('openai');
-const { logAttempt } = require('./database.js'); 
+const { logAttempt } = require('./database.js');
 
 const app = express();
 app.use(express.json());
@@ -14,26 +14,26 @@ const openai = new OpenAI({
 async function triageIssue(issueDescription) {
     let attempts = 0;
     const maxAttempts = 3;
-    
+
     let currentPrompt = `Analyze this GitHub issue. Start your response with the exact words "Here is the data:" and then provide a JSON object with keys "priority" and "category". \n\nIssue: ${issueDescription}`;
 
     while (attempts < maxAttempts) {
         attempts++;
-        let rawText = ""; 
-        
+        let rawText = "";
+
         try {
             const response = await openai.chat.completions.create({
-                model: "gpt-4o", 
+                model: "gpt-4o",
                 messages: [{ role: "user", content: currentPrompt }],
             });
 
             rawText = response.choices[0].message.content.trim();
-            const validatedData = JSON.parse(rawText); 
-            
+            const validatedData = JSON.parse(rawText);
+
             await logAttempt(issueDescription, rawText, 'success', attempts);
-            
+
             // Return both the data AND how many attempts it took
-            return { result: validatedData, attempts: attempts }; 
+            return { result: validatedData, attempts: attempts };
 
         } catch (error) {
             if (attempts < maxAttempts) {
@@ -50,13 +50,13 @@ async function triageIssue(issueDescription) {
 app.post('/api/triage', async (req, res) => {
     const userIssue = req.body.issue;
     console.log(`\nUI requested triage for: "${userIssue}"`);
-    
+
     const finalData = await triageIssue(userIssue);
     res.json(finalData); // Send the data back to the browser
 });
 
 // Start the server!
-const PORT = 3000;
+const PORT = process.env.PORT || 3000; // Let the cloud choose the port
 app.listen(PORT, () => {
     console.log(`\n🚀 Server is running! Open your browser and go to: http://localhost:${PORT}`);
 });
