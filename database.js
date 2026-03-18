@@ -1,7 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 
 // 1. Create a connection to the database file
-// This will automatically create a file called 'triage.db' in your folder
 const db = new sqlite3.Database('./triage.db', (err) => {
     if (err) {
         console.error("Error opening database:", err.message);
@@ -29,7 +28,7 @@ function logAttempt(issueText, aiResponse, status, attempts) {
     return new Promise((resolve, reject) => {
         const query = `INSERT INTO triage_logs (issue_text, ai_response, status, attempts) VALUES (?, ?, ?, ?)`;
 
-        // We use the '?' placeholders to prevent SQL injection—a good security practice to mention!
+        // We use the '?' placeholders to prevent SQL injection
         db.run(query, [issueText, aiResponse, status, attempts], function (err) {
             if (err) {
                 console.error("Failed to save log:", err.message);
