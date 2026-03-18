@@ -1,14 +1,20 @@
 {
   "name": "guardian-agent",
   "version": "1.0.0",
-  "description": "",
+  "description": "🛡️ Guardian Agent: A self-healing AI triage microservice that demonstrates resilient LLM workflows with automatic failure recovery, JSON parsing correction, and unattended automation capabilities",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "ai",
+    "llm",
+    "triage",
+    "self-healing",
+    "automation"
+  ],
+  "author": "Kenneth Ekow Inkum",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
