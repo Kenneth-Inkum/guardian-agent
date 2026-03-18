@@ -19,7 +19,7 @@ In the real world, LLMs frequently hallucinate or fail to return strict JSON for
 ### 💡 Why I Built This
 While my core background is in traditional full-stack software engineering, I am actively diving deeper into AI integrations. 
 
-When reviewing the requirements for the AI Web Developer role at Invenio Search Group, I noticed a strong emphasis on building "unattended automations that recover from failure." Rather than just stating I could learn how to do this, I decided to spend a some time to actually build it.
+When reviewing the requirements for the AI Web Developer role at Invenio Search Group, I noticed a strong emphasis on building "unattended automations that recover from failure." I decided to spend some time to actually build it.
 
 I created this Guardian Agent to demonstrate how my foundational engineering skills (Node.js, Express, state management via SQLite) translate directly into building resilient, fault-tolerant AI systems. It proves I understand the difference between a brittle API call and a robust AI workflow.
 ---
